@@ -1,0 +1,2 @@
+gfxcTitleScreenHeight		EQU 10
+

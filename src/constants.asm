@@ -1,0 +1,5 @@
+include "constants/gbhw.asm"
+include "constants/text_constants.asm"
+include "constants/misc_constants.asm"
+include "constants/gfx_constants.asm"
+include "macros.asm"
