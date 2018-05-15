@@ -6,6 +6,7 @@
 *.1bpp
 *.gbc
 *.gb
+*.sym
 
 # saves, BGB
 *.sav
