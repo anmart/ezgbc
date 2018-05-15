@@ -1,0 +1,13 @@
+# generated
+*.o
+*.pal
+*.tilemap
+*.2bpp
+*.1bpp
+*.gbc
+*.gb
+
+# saves, BGB
+*.sav
+*.sn[0-9]
+
