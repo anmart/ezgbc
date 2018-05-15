@@ -726,5 +726,17 @@ StartGame:
 	ld [wTileBufferSize], a
 	setBufferDrawLocation vBGMap0 + $20
 
+	REPT 40
+	call WaitForVBlank
+	ENDR
+
+; Copies BC bytes from HL to DE
 .loop:
+	ld a, [rSCY]
+	add 8
+	ld [rSCY], a
+	ld a, [rSCX]
+	add 8
+	ld [rSCX], a
+	call WaitForVBlank
 	jr .loop

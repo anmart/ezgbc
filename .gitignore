@@ -1,7 +1,5 @@
 # generated
 *.o
-*.pal
-*.tilemap
 *.2bpp
 *.1bpp
 *.gbc

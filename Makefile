@@ -9,14 +9,12 @@ all: clean $(name).gbc
 
 clean:
 	@rm -f $(obj) $(name).gbc $(name).sym
-	@find . -name "*.pal" -type f -delete
 	@find . -name "*.2bpp" -type f -delete
 	@find . -name "*.1bpp" -type f -delete
 	@find . -name "*.o" -type f -delete
-	@find . -name "*.tilemap" -type f -delete
 
 gfx:
-	@find -iname "*.png" -exec sh -c 'rgbgfx -FPT -o $${1%.png}.2bpp $$1' _ {} \;
+	@find -iname "*.png" -exec sh -c 'rgbgfx -F -o $${1%.png}.2bpp $$1' _ {} \;
 
 .asm.o:
 	@rgbasm -i $(src)/ -o $@ $<
