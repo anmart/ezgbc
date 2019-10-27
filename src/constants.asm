@@ -1,4 +1,4 @@
-include "constants/gbhw.asm"
+include "constants/hardware.asm"
 include "constants/text_constants.asm"
 include "constants/misc_constants.asm"
 include "constants/gfx_constants.asm"

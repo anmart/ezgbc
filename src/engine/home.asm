@@ -222,7 +222,7 @@ section "bankswitch", rom0
 ; switches to the bank in a
 _Bankswitch:
 	ld [hCurrentBank], a
-	ld [MBC5_ROMBank], a
+	ld [rMBC5_BANK], a
 	ret
 
 section "VBlank", rom0
@@ -375,11 +375,11 @@ LoadIncreasingTilesToVram:
 LoadBGPaletteData:
 	push bc
 	ld a, $80
-	ld [rBGPI], a
+	ld [rBCPS], a
 	ld b, $40
 .loop
 	ldi a, [hl]
-	ld [rBGPD], a
+	ld [rBCPD], a
 	dec b
 	jr nz, .loop
 	pop bc
