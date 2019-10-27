@@ -13,9 +13,16 @@ _SCRN0       EQU $9800 ; $9800->$9BFF
 _SCRN1       EQU $9C00 ; $9C00->$9FFF
 _SRAM        EQU $A000 ; $A000->$BFFF
 _RAM         EQU $C000 ; $C000->$DFFF
+_RAMSWAP     EQU $D000 ; for gbc, swappable
 _OAMRAM      EQU $FE00 ; $FE00->$FE9F
 _AUD3WAVERAM EQU $FF30 ; $FF30->$FF3F
 _HRAM        EQU $FF80 ; $FF80->$FFFE
+
+; Various sizes for clearing wram
+RAM_BANK_SIZE EQU $1000
+HRAM_SIZE     EQU $7F
+VRAM_SIZE     EQU $2000
+OAM_SIZE      EQU $a0
 
 
 ; Basic VRAM constants
@@ -49,11 +56,11 @@ OAMF_BANK1      EQU %00001000 ; Bank number; 0,1 (GBC)
 
 OAMF_PALMASK    EQU %00000111 ; Palette (GBC)
 
-OAMB_PRI        EQU 7 ; Priority 
-OAMB_YFLIP      EQU 6 ; Y flip 
-OAMB_XFLIP      EQU 5 ; X flip 
-OAMB_PAL1       EQU 4 ; Palette number; 0,1 (DMG) 
-OAMB_BANK1      EQU 3 ; Bank number; 0,1 (GBC) 
+OAMB_PRI        EQU 7 ; Priority
+OAMB_YFLIP      EQU 6 ; Y flip
+OAMB_XFLIP      EQU 5 ; X flip
+OAMB_PAL1       EQU 4 ; Palette number; 0,1 (DMG)
+OAMB_BANK1      EQU 3 ; Bank number; 0,1 (GBC)
 
 
 ;***************************************************************************
