@@ -3,3 +3,6 @@ endText EQU $ff
 
 ; ascii constants for certain text effects
 SPACE_CHAR EQU $21
+
+TEXT_VRAM_OFFSET EQU $80
+ASCII_TO_TILE    EQU $01 + TEXT_VRAM_OFFSET

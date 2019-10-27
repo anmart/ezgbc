@@ -61,21 +61,19 @@ Init:
 	ld sp, wStack
 	; establish our arbitrary stack location
 
-	fill $c000, $1000, 0
+	fill _RAM, RAM_BANK_SIZE, 0
 
 	ld d, 7
 .clear_wram_banks
 	ld a, d
 	ld [rSVBK], a
-	fill $d000, $1000, 0
+	fill _RAMSWAP, RAM_BANK_SIZE, 0
 	dec d
 	jr nz, .clear_wram_banks
 
-		; clear hram
-	fill $ff80, $7f, 0
-
-	fill $8000, $2000, 0 ; zero vram
-	fill $fe00, $a0,   0 ; zero OAM
+	fill _HRAM, HRAM_SIZE,  0 ; zero hram
+	fill _VRAM, VRAM_SIZE,  0 ; zero vram
+	fill _OAMRAM, OAM_SIZE, 0 ; zero OAM
 
 	ld a, 1
 	ld [hCurrentBank], a
@@ -86,7 +84,7 @@ Init:
 	call LoadBGPaletteData
 
 	; set up the LCDC
-	ld a, %01010011 ; Screen off, See docs for rest
+	ld a, LCDCF_WIN9C00 | LCDCF_BG8000 | LCDCF_OBJON | LCDCF_BGON
 	ld [rLCDC], a
 
 	; load interrupt flag with no requests
@@ -295,7 +293,7 @@ LoadFontToVRAM:
 	ld [rVBK], a
 	ld bc, gfx_EndFontTiles - gfx_FontTiles
 	ld hl, gfx_FontTiles
-	ld de, vChars0 + vTileDataSize
+	ld de, vChars1 + vTileDataSize
 	call CopyData
 	xor a
 	ld [rVBK], a
@@ -329,6 +327,7 @@ LoadTextToMapBuffer:
 	inc bc
 	inc a
 	jr z, .done
+	add TEXT_VRAM_OFFSET
 
 	ld [de], a
 	inc de
@@ -682,7 +681,7 @@ StartGame:
 	set 0, [hl]
 
 	ld hl, wFastVerticalTileBuffer
-	ld a, $66
+	ld a, "e" + ASCII_TO_TILE
 	ld b, $14
 .looplette
 	ldi [hl], a
@@ -698,7 +697,7 @@ StartGame:
 
 
 	ld hl, wFastHorizontalTileBuffer
-	ld a, $60
+	ld a, "_" + ASCII_TO_TILE
 	ld b, $14
 .looplette3
 	ldi [hl], a
@@ -732,6 +731,7 @@ StartGame:
 
 ; Copies BC bytes from HL to DE
 .loop:
+	jr .loop
 	ld a, [rSCY]
 	add 8
 	ld [rSCY], a
